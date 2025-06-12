@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>Measmerize widget</title>
+    </head>
+    <body>
+      <script
+        id="measmerize-script"
+        src="https://client.measmerize.com/script.js"
+        data-brand-code="$BRAND_CODE"
+        data-product-code="$PRODUCT_CODE"
+        data-lang-code="$LANGUAGE_CODE"
+        data-country-code="$COUNTRY_CODE"
+        async
+      ></script>
+      <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+          const measmerizeScript = document.getElementById('measmerize-script');
+
+          measmerizeScript.addEventListener('measmerize.widget.ready', () => {
+            //TODO: implement post message to flutter
+          }); // This event confirms that you have passed valid data-brand-code and data-product-code, which means that widget can be used
+
+          measmerizeScript.addEventListener('measmerize.modal.close', () => {
+            //TODO: implement post message to flutter
+          }); // This event is fired when modal should be closed, when user clicks "Continue" on the widgets last step
+
+          measmerizeScript.addEventListener('measmerize.widget.select', (event) => {
+            const { size } = event.detail;
+            //TODO: implement post message to flutter
+          });
+        });
+      </script>
+    </body>
+</html>
