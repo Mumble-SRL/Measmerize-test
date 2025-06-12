@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SpMeasmerizeChartScaffold extends StatefulWidget {
   const SpMeasmerizeChartScaffold({
@@ -56,6 +59,8 @@ class _SpMeasmerizeChartScaffoldState extends State<SpMeasmerizeChartScaffold> {
 
     if (mounted) {
       try {
+        _writeHtml(html);
+
         webViewController.loadHtmlString(html);
         setState(() {
           _webViewController = webViewController;
@@ -64,6 +69,15 @@ class _SpMeasmerizeChartScaffoldState extends State<SpMeasmerizeChartScaffold> {
         debugPrint(e.toString());
       }
     }
+  }
+
+  Future<void> _writeHtml(String html) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final path = '${directory.path}/test.html';
+    print(path);
+    File f = File(path);
+    print(f.path);
+    await f.writeAsString(html);
   }
 
   @override
